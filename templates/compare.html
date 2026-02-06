@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Images - Image Similarity Comparator{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-exchange-alt"></i> Compare Images</h1>
+        <p>Select two images to analyze their similarity using perceptual hashing.</p>
+    </div>
+
+    <div class="compare-section">
+        <div class="image-selectors">
+            <div class="selector-card">
+                <h3><i class="fas fa-image"></i> Image 1</h3>
+                <div class="selector-preview" id="preview1">
+                    <i class="fas fa-image placeholder-icon"></i>
+                    <p>No image selected</p>
+                </div>
+                <button class="btn btn-secondary btn-select" data-selector="1">
+                    <i class="fas fa-folder-open"></i> Select Image
+                </button>
+                <input type="hidden" id="imageId1" value="">
+            </div>
+
+            <div class="vs-divider">
+                <span>VS</span>
+            </div>
+
+            <div class="selector-card">
+                <h3><i class="fas fa-image"></i> Image 2</h3>
+                <div class="selector-preview" id="preview2">
+                    <i class="fas fa-image placeholder-icon"></i>
+                    <p>No image selected</p>
+                </div>
+                <button class="btn btn-secondary btn-select" data-selector="2">
+                    <i class="fas fa-folder-open"></i> Select Image
+                </button>
+                <input type="hidden" id="imageId2" value="">
+            </div>
+        </div>
+
+        <div class="compare-action">
+            <button class="btn btn-primary btn-compare" id="compareBtn" disabled>
+                <i class="fas fa-balance-scale"></i> Compare Images
+            </button>
+        </div>
+
+        <div class="comparison-result" id="comparisonResult" style="display: none;">
+            <div class="result-header">
+                <h2><i class="fas fa-chart-bar"></i> Comparison Result</h2>
+            </div>
+            
+            <div class="similarity-score">
+                <div class="score-circle" id="scoreCircle">
+                    <span class="score-value" id="scoreValue">0%</span>
+                </div>
+                <div class="score-info">
+                    <h3 id="similarityLevel">Similarity Level</h3>
+                    <p id="similarityDescription"></p>
+                </div>
+            </div>
+
+            <div class="comparison-details">
+                <div class="detail-card">
+                    <h4><i class="fas fa-info-circle"></i> Details</h4>
+                    <ul id="comparisonDetails">
+                        <li><strong>Hash Difference:</strong> <span id="hashDiff">-</span></li>
+                        <li><strong>Image 1:</strong> <span id="img1Name">-</span></li>
+                        <li><strong>Image 2:</strong> <span id="img2Name">-</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="side-by-side">
+                <h3><i class="fas fa-images"></i> Side by Side Comparison</h3>
+                <div class="comparison-images">
+                    <div class="comp-image">
+                        <img id="compImg1" src="" alt="Image 1">
+                        <p id="compLabel1">Image 1</p>
+                    </div>
+                    <div class="comp-image">
+                        <img id="compImg2" src="" alt="Image 2">
+                        <p id="compLabel2">Image 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image Selection Modal -->
+<div class="image-modal" id="selectionModal">
+    <div class="modal-content modal-large">
+        <div class="modal-header">
+            <h2><i class="fas fa-images"></i> Select an Image</h2>
+            <span class="modal-close" id="modalClose">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="selection-grid" id="selectionGrid"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelSelection">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- No Images Modal -->
+<div class="confirm-modal" id="noImagesModal">
+    <div class="confirm-content">
+        <i class="fas fa-info-circle"></i>
+        <h3>No Images Available</h3>
+        <p>You need to upload images before you can compare them.</p>
+        <div class="confirm-actions">
+            <a href="/gallery" class="btn btn-secondary">View Gallery</a>
+            <a href="/" class="btn btn-primary">Upload Images</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/compare.js') }}"></script>
+{% endblock %}

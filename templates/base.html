@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnapTwin</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="navbar">
+      <div id="navbar-left">SnapTwin</div>
+
+      <div id="navbar-right">
+        <a href="/">Upload</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+
+    <main class="main-content">{% block content %}{% endblock %}</main>
+
+    <footer>
+      <p>&copy; 2026 snaptwin. #team_straingr</p>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

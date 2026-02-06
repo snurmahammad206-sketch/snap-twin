@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1> Image Gallery</h1>
+        <p>View all your uploaded images. Select any two images to compare their similarity.</p>
+    </div>
+
+    <div class="gallery-controls">
+        <div class="gallery-stats">
+            <span id="imageCount"><i class="fas fa-images"></i> 0 images</span>
+        </div>
+        <div class="gallery-actions">
+            <button class="btn btn-danger" id="clearAllBtn">
+                Clear All
+            </button>
+            <a href="/compare" class="btn btn-primary">
+                 Go to Compare
+            </a>
+        </div>
+    </div>
+
+    <div class="gallery-empty" id="galleryEmpty">
+        <i class="fas fa-images"></i>
+        <h3>No Images Yet</h3>
+        <p>Upload some images to get started!</p>
+        <a href="/" class="btn btn-primary">
+             Upload Images
+        </a>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid" style="display: none;"></div>
+
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <img id="modalImage" src="" alt="Full size">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDetails"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="confirm-modal" id="deleteModal">
+    <div class="confirm-content">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Delete Image?</h3>
+        <p>Are you sure you want to delete this image? This action cannot be undone.</p>
+        <div class="confirm-actions">
+            <button class="btn btn-secondary" id="cancelDelete">Cancel</button>
+            <button class="btn btn-danger" id="confirmDelete">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Clear All Confirmation Modal -->
+<div class="confirm-modal" id="clearAllModal">
+    <div class="confirm-content">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Clear All Images?</h3>
+        <p>Are you sure you want to delete all images? This action cannot be undone.</p>
+        <div class="confirm-actions">
+            <button class="btn btn-secondary" id="cancelClearAll">Cancel</button>
+            <button class="btn btn-danger" id="confirmClearAll">Delete All</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+{% endblock %}
